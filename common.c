@@ -30,7 +30,7 @@ void _initReqData(struct msg_t* req, uint8_t group, uint8_t cmd, uint8_t* qname,
 void _setAndGetData(struct msg_t* req, struct msg_t* res, uint8_t* qname)
 {
 //    memset(res->data, 0, MAX_MSG_DATA_SIZE);
-    GET_INSTANCE(ops_mq)->set_to(TASK_IOPCLAUNCHER, req);
-    GET_INSTANCE(ops_mq)->get_from(qname, res);
-    GET_INSTANCE(ops_mq)->destroy(qname);
+    GET_INSTANCE_MQ_OBJ()->set_to(TASK_IOPCLAUNCHER, req);
+    GET_INSTANCE_MQ_OBJ()->get_from(qname, res);
+    GET_INSTANCE_MQ_OBJ()->destroy(qname);
 }
