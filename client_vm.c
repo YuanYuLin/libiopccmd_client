@@ -10,7 +10,7 @@
 #include "iopccmd_vmcount.h"
 #include "iopccmd_vmget.h"
 #include "iopccmd_vmset.h"
-#include "client_vm.h"
+#include "iopcops_client_vm.h"
 
 static uint32_t count()
 {
@@ -73,11 +73,11 @@ static int get(uint8_t index, struct vm_info_t* info)
 
 //static struct client_vm_t* obj = NULL;
 
-DEFINE_INSTANCE(client_vm);
-DEFINE_GET_INSTANCE(client_vm)
+DEFINE_INSTANCE(client_vm, obj);
+DEFINE_GET_INSTANCE(client_vm, obj)
 {
     if(!obj) {
-        obj = malloc(sizeof(struct client_vm_t));
+        obj = malloc(sizeof(struct ops_client_vm_t));
 	obj->count = count;
 	obj->set = set;
 	obj->get = get;
@@ -85,7 +85,7 @@ DEFINE_GET_INSTANCE(client_vm)
     return obj;
 }
 
-DEFINE_DEL_INSTANCE(client_vm)
+DEFINE_DEL_INSTANCE(client_vm, obj)
 {
     if(obj)
         free(obj);

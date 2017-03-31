@@ -9,7 +9,7 @@
 #include "iopccmd_raiddevcount.h"
 #include "iopccmd_raiddevget.h"
 #include "iopccmd_raiddevset.h"
-#include "client_raiddev.h"
+#include "iopcops_client_raiddev.h"
 
 static uint32_t count()
 {
@@ -80,11 +80,11 @@ static int get(uint8_t index, struct raiddev_info_t* info)
 
 //static struct client_raiddev_t* obj = NULL;
 
-DEFINE_INSTANCE(client_raiddev);
-DEFINE_GET_INSTANCE(client_raiddev)
+DEFINE_INSTANCE(client_raiddev, obj);
+DEFINE_GET_INSTANCE(client_raiddev, obj)
 {
     if(!obj) {
-        obj = malloc(sizeof(struct client_raiddev_t));
+        obj = malloc(sizeof(struct ops_client_raiddev_t));
 	obj->count = count;
 //	obj->add = add;
 	obj->set = set;
@@ -93,7 +93,7 @@ DEFINE_GET_INSTANCE(client_raiddev)
     return obj;
 }
 
-DEFINE_DEL_INSTANCE(client_raiddev)
+DEFINE_DEL_INSTANCE(client_raiddev, obj)
 {
     if(obj)
         free(obj);

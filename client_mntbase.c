@@ -10,7 +10,7 @@
 #include "iopccmd_mntbasecount.h"
 #include "iopccmd_mntbaseget.h"
 #include "iopccmd_mntbaseset.h"
-#include "client_mntbase.h"
+#include "iopcops_client_mntbase.h"
 
 static uint32_t count()
 {
@@ -75,11 +75,11 @@ static int get(uint8_t index, struct mntbase_info_t* info)
 
 //static struct client_mntbase_t* obj = NULL;
 
-DEFINE_INSTANCE(client_mntbase);
-DEFINE_GET_INSTANCE(client_mntbase)
+DEFINE_INSTANCE(client_mntbase, obj);
+DEFINE_GET_INSTANCE(client_mntbase, obj)
 {
     if(!obj) {
-        obj = malloc(sizeof(struct client_mntbase_t));
+        obj = malloc(sizeof(struct ops_client_mntbase_t));
 	obj->count = count;
 //	obj->add = add;
 	obj->set = set;
@@ -88,7 +88,7 @@ DEFINE_GET_INSTANCE(client_mntbase)
     return obj;
 }
 
-DEFINE_DEL_INSTANCE(client_mntbase)
+DEFINE_DEL_INSTANCE(client_mntbase, obj)
 {
     if(obj)
         free(obj);
