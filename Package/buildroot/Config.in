@@ -1,0 +1,5 @@
+config BR2_PACKAGE_LIBIOPCCMD_CLIENT
+	bool "libiopccmd_client"
+	select BR2_PACKAGE_LIBIOPCCOMMON
+	help
+	  The client commands library of IOPC.
